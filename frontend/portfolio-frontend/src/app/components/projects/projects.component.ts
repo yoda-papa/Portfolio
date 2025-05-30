@@ -31,7 +31,7 @@ import { Subject, takeUntil } from 'rxjs';
         <!-- Projects Grid -->
         <div class="projects-grid">
           <div *ngFor="let project of projects" class="project-card">
-            <img [src]="project.imageUrl" [alt]="project.title">
+            <img src="{{ project.imageUrl }}" [alt]="project.title">
             <h3>{{ project.title }}</h3>
             <p>{{ project.description }}</p>
             <div class="technologies">
@@ -41,7 +41,7 @@ import { Subject, takeUntil } from 'rxjs';
             </div>
             <div class="project-links">
               <a [href]="project.projectUrl" target="_blank" class="btn">View Project</a>
-              <button (click)="editProject(project)" class="btn">Edit</button>
+              <button (click)="editProject(project)" class="btn btn-primary">Edit</button>
               <button (click)="deleteProject(project.id)" class="btn btn-danger">Delete</button>
             </div>
           </div>
@@ -55,24 +55,27 @@ import { Subject, takeUntil } from 'rxjs';
   styles: [`
     .projects-container {
       padding: 2rem;
+      color: var(--text-color);
     }
 
     .loading, .error {
       text-align: center;
       padding: 2rem;
       font-size: 1.2rem;
+      color: var(--text-color);
     }
 
     .error {
-      color: #dc3545;
+      color: var(--danger-color, #dc3545);
     }
 
     .visitor-count {
-      background: #f0f0f0;
+      background: var(--section-bg-alt);
       padding: 0.5rem;
       border-radius: 4px;
       margin-bottom: 1rem;
       text-align: right;
+      color: var(--text-color);
     }
 
     .projects-grid {
@@ -83,15 +86,17 @@ import { Subject, takeUntil } from 'rxjs';
     }
 
     .project-card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: var(--card-shadow, 0 2px 4px rgba(0,0,0,0.1));
       overflow: hidden;
       transition: transform 0.2s;
+      border: 1px solid var(--card-border);
     }
 
     .project-card:hover {
       transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover, 0 4px 8px rgba(0, 0, 0, 0.1));
     }
 
     .project-card img {
@@ -103,11 +108,12 @@ import { Subject, takeUntil } from 'rxjs';
     .project-card h3 {
       padding: 1rem;
       margin: 0;
+      color: var(--card-title);
     }
 
     .project-card p {
       padding: 0 1rem;
-      color: #666;
+      color: var(--card-text);
     }
 
     .technologies {
@@ -118,10 +124,16 @@ import { Subject, takeUntil } from 'rxjs';
     }
 
     .tech-tag {
-      background: #e0e0e0;
+      background: var(--neutral-light);
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
       font-size: 0.875rem;
+      color: var(--text-dark);
+    }
+
+    body.dark-theme .tech-tag {
+      background: var(--neutral-dark);
+      color: var(--text-light);
     }
 
     .project-links {
@@ -137,16 +149,40 @@ import { Subject, takeUntil } from 'rxjs';
       cursor: pointer;
       text-decoration: none;
       display: inline-block;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      
+      /* Default button appearance for View Project and Edit */
+      background: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--text-color);
+    }
+
+    .btn:hover {
+      background: var(--primary-color);
+      color: var(--text-light);
+      border-color: var(--primary-color);
     }
 
     .btn-primary {
-      background: #007bff;
-      color: white;
+      background: var(--primary-color);
+      color: var(--text-light);
+      border: 1px solid var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+       background: var(--accent-color); /* Use accent for hover effect */
+       border-color: var(--accent-color);
     }
 
     .btn-danger {
-      background: #dc3545;
-      color: white;
+      background: var(--primary-color); /* Make delete button primary color as requested */
+      color: var(--text-light);
+      border: 1px solid var(--primary-color);
+    }
+    
+    .btn-danger:hover {
+       background: var(--accent-color); /* Use accent for hover effect */
+       border-color: var(--accent-color);
     }
   `],
   standalone: true,
@@ -196,7 +232,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   editProject(project: Project) {
     // Using the simplified route with just the ID
-    this.router.navigate(['/projects', project.id]);
+    this.router.navigate(['/projects', 'edit', project.id]);
   }
 
   deleteProject(id: number) {

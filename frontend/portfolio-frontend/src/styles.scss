@@ -1,1 +1,249 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Import Bootstrap
+@use 'bootstrap/scss/bootstrap';
+
+/* Theme Variables */
+:root {
+  /* Simple Palette */
+  --primary-color: #007bff;
+  --accent-color: #6c757d;
+  --neutral-light: #f8f9fa;
+  --neutral-dark: #212529;
+  --text-light: #ffffff;
+  --text-dark: #212529;
+  --navy-blue: #0A192F;
+  --primary-color-dark: #0056b3; /* Added a darker shade of primary */
+  --primary-color-light: #66b2ff; /* Added a lighter shade of primary */
+
+  /* Light Theme Variables */
+  --background-color: var(--neutral-light);
+  --text-color: var(--text-dark);
+  --navbar-bg: var(--navy-blue);
+  --navbar-text: var(--text-light);
+  --navbar-link-hover: var(--primary-color);
+  --section-bg-primary: var(--neutral-light);
+  --section-bg-alt: #cfe2ff; /* Light blue background for alternating sections */
+  --section-title-color: var(--text-dark);
+  --card-bg: var(--text-light);
+  --card-border: rgba(0,0,0,0.125);
+  --card-text: var(--text-dark);
+  --card-title: var(--primary-color);
+  --footer-bg: var(--navy-blue);
+  --footer-text: var(--text-light);
+  --link-color: var(--primary-color);
+  --link-hover: var(--accent-color);
+
+  /* Hero gradient colors for Light Theme */
+  --hero-gradient-start: #81c784; /* Muted green-blue */
+  --hero-gradient-end: #4db6ac; /* Muted teal */
+  --hero-text-color: var(--text-light);
+  --hero-subtext-color: var(--text-light);
+
+  /* Section title underline color - Light Theme */
+  --section-title-underline: #000;
+}
+
+/* Dark theme variables */
+body.dark-theme {
+  --background-color: var(--neutral-dark);
+  --text-color: var(--text-light);
+  --navbar-bg: var(--neutral-dark);
+  --navbar-text: var(--text-light);
+  --navbar-link-hover: var(--primary-color);
+  --section-bg-primary: #343a40;
+  --section-bg-alt: var(--neutral-dark);
+  --section-title-color: var(--primary-color);
+  --card-bg: #454d55;
+  --card-border: rgba(255,255,255,0.125);
+  --card-text: var(--text-color); /* Use the general text color for cards in dark theme */
+  --card-title: var(--primary-color);
+  --footer-bg: #1a1a1a;
+  --footer-text: var(--accent-color);
+  --link-color: var(--accent-color);
+  --link-hover: var(--primary-color);
+
+  /* Specific dark theme overrides or additions */
+  --tech-stack-color: var(--accent-color); /* Use accent color for tech stack in dark theme */
+
+  /* Hero gradient colors for Dark Theme */
+  --hero-gradient-start: #1a1a1a;
+  --hero-gradient-end: #343a40;
+  --hero-text-color: var(--text-light);
+  --hero-subtext-color: var(--accent-color);
+
+   /* Section title underline color - Dark Theme */
+  --section-title-underline: var(--primary-color);
+}
+
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Links */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Lists */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Bootstrap overrides */
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.navbar-brand, .nav-link {
+  color: var(--navbar-text) !important;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--navbar-link-hover) !important;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: var(--card-title);
+}
+
+.card-text {
+  color: var(--card-text);
+}
+
+.section-title {
+  color: var(--section-title-color);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  border-top: none;
+}
+
+// Custom utility classes
+.text-center {
+  text-align: center;
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+/* You can add your other custom styles here */
+
+/* Print-friendly styles applied globally */
+@media print {
+  /* Hide non-essential elements */
+  .navbar, .theme-toggle-button, footer, .projects .project-links, .contact-info, .hero-actions {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Adjust margins and padding */
+  .container {
+      padding: 0;
+      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+  }
+
+  section {
+      padding: 1rem 0 !important;
+      margin-bottom: 1rem;
+  }
+
+  .section-title {
+      margin-bottom: 1rem !important;
+  }
+
+  .card {
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+      break-inside: avoid;
+      margin-bottom: 1rem !important;
+  }
+
+  .card-body {
+      padding: 1rem !important;
+  }
+
+  /* Page breaks */
+  .experience .card, .projects .card {
+    page-break-inside: avoid;
+  }
+
+  /* Ensure links are visible and show URL */
+  a::after {
+      content: " (" attr(href) ")";
+      font-size: 9pt;
+      word-break: break-all;
+  }
+
+  /* Specific adjustments */
+  .tech-tag {
+      background: #e0e0e0 !important;
+      color: #000 !important;
+      border: 1px solid #ccc !important;
+  }
+
+   .list-unstyled li {
+       margin-bottom: 0.25rem !important;
+   }
+}
+
+
+
+

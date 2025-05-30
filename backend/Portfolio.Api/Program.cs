@@ -2,6 +2,8 @@ using Portfolio.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using Portfolio.Api.Hubs;
+using Portfolio.Api.Dtos;
+using AutoMapper;
 
 // Set invariant culture for the application
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
@@ -17,6 +19,9 @@ builder.Services.AddControllers()
     {
         // options.JsonSerializerOptions.PropertyNamingPolicy = null;
     });
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 // Add SignalR
 builder.Services.AddSignalR();
@@ -72,7 +77,7 @@ using (var scope = app.Services.CreateScope())
                     Title = "Sample Project 1",
                     Description = "This is a description for sample project 1.",
                     ImageUrl = "https://via.placeholder.com/300", // Placeholder image URL
-                    ProjectUrl = "#",
+                    ProjectUrl = "https://www.sampleproject1.com",
                     Technologies = new List<string> { "Angular", "C#", ".NET" },
                     StartDate = DateTime.UtcNow.AddMonths(-6),
                     EndDate = DateTime.UtcNow.AddMonths(-3),
@@ -83,7 +88,7 @@ using (var scope = app.Services.CreateScope())
                     Title = "Sample Project 2",
                     Description = "This is a description for sample project 2.",
                     ImageUrl = "https://via.placeholder.com/300", // Placeholder image URL
-                    ProjectUrl = "#",
+                    ProjectUrl = "https://www.sampleproject2.com",
                     Technologies = new List<string> { "React", "Node.js" },
                     StartDate = DateTime.UtcNow.AddMonths(-12),
                     EndDate = DateTime.UtcNow.AddMonths(-9),

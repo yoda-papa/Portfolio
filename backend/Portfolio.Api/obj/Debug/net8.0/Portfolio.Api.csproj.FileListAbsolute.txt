@@ -169,3 +169,6 @@ E:\Project\Portfolio\backend\Portfolio.Api\obj\Debug\net8.0\refint\Portfolio.Api
 E:\Project\Portfolio\backend\Portfolio.Api\obj\Debug\net8.0\Portfolio.Api.pdb
 E:\Project\Portfolio\backend\Portfolio.Api\obj\Debug\net8.0\Portfolio.Api.genruntimeconfig.cache
 E:\Project\Portfolio\backend\Portfolio.Api\obj\Debug\net8.0\ref\Portfolio.Api.dll
+E:\Project\Portfolio\backend\Portfolio.Api\obj\Debug\net8.0\Portfolio.Api.sourcelink.json
+E:\Project\Portfolio\backend\Portfolio.Api\bin\Debug\net8.0\AutoMapper.dll
+E:\Project\Portfolio\backend\Portfolio.Api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -10,3 +10,4 @@ E:\Project\Portfolio\backend\Portfolio.Data\obj\Debug\net8.0\Portfolio.Data.dll
 E:\Project\Portfolio\backend\Portfolio.Data\obj\Debug\net8.0\refint\Portfolio.Data.dll
 E:\Project\Portfolio\backend\Portfolio.Data\obj\Debug\net8.0\Portfolio.Data.pdb
 E:\Project\Portfolio\backend\Portfolio.Data\obj\Debug\net8.0\ref\Portfolio.Data.dll
+E:\Project\Portfolio\backend\Portfolio.Data\obj\Debug\net8.0\Portfolio.Data.sourcelink.json

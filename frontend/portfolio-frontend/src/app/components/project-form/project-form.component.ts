@@ -31,11 +31,17 @@ import { switchMap, catchError, of, tap } from 'rxjs';
         <div class="form-group">
           <label for="imageUrl">Image URL</label>
           <input id="imageUrl" type="url" formControlName="imageUrl" class="form-control">
+          <div *ngIf="projectForm.get('imageUrl')?.errors?.['pattern'] && projectForm.get('imageUrl')?.touched" class="error">
+            Please enter a valid URL
+          </div>
         </div>
 
         <div class="form-group">
           <label for="projectUrl">Project URL</label>
           <input id="projectUrl" type="url" formControlName="projectUrl" class="form-control">
+          <div *ngIf="projectForm.get('projectUrl')?.errors?.['pattern'] && projectForm.get('projectUrl')?.touched" class="error">
+            Please enter a valid URL
+          </div>
         </div>
 
         <div class="form-group">
@@ -46,6 +52,9 @@ import { switchMap, catchError, of, tap } from 'rxjs';
         <div class="form-group">
           <label for="startDate">Start Date</label>
           <input id="startDate" type="date" formControlName="startDate" class="form-control">
+          <div *ngIf="projectForm.get('startDate')?.errors?.['required'] && projectForm.get('startDate')?.touched" class="error">
+            Start Date is required
+          </div>
         </div>
 
         <div class="form-group">
@@ -135,12 +144,15 @@ export class ProjectFormComponent implements OnInit {
   isEditMode = false;
   projectId: number | null = null;
 
+  // Basic URL pattern (you might want a more comprehensive one)
+  private urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private portfolioService: PortfolioService) {
     this.projectForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      imageUrl: [''],
-      projectUrl: [''],
+      imageUrl: ['', Validators.pattern(this.urlPattern)],
+      projectUrl: ['', Validators.pattern(this.urlPattern)],
       technologies: [''],
       startDate: ['', Validators.required],
       endDate: [''],
@@ -179,7 +191,9 @@ export class ProjectFormComponent implements OnInit {
           return of(undefined); // Not in edit mode
         }
       })
-    ).subscribe();
+    ).subscribe(() => {
+      // Log form status after initialization/patching
+    });
   }
 
   onSubmit() {
@@ -202,7 +216,6 @@ export class ProjectFormComponent implements OnInit {
             return of(null);
           })
         ).subscribe(() => {
-          console.log('Project updated successfully');
           this.router.navigate(['/projects']);
         });
       } else if (!this.isEditMode) {
@@ -213,7 +226,6 @@ export class ProjectFormComponent implements OnInit {
             return of(null);
           })
         ).subscribe(() => {
-          console.log('Project created successfully');
           this.router.navigate(['/projects']);
         });
       }

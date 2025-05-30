@@ -1,18 +1,12 @@
 import { Routes } from '@angular/router';
-import { ProjectManagementComponent } from './components/project-management/project-management.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectFormComponent } from './components/project-form/project-form.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/projects', pathMatch: 'full' },
-    {
-        path: 'projects',
-        component: ProjectManagementComponent,
-        children: [
-            { path: '', component: ProjectsComponent }, // Default view for /projects
-            { path: 'new', component: ProjectFormComponent }, // Route for adding a new project
-            { path: ':id', component: ProjectFormComponent } // Route for editing a project
-        ]
-    },
-    { path: '**', redirectTo: '/projects' }
+    { path: '', component: HomeComponent },
+    { path: 'projects', component: ProjectsComponent },
+    { path: 'projects/new', component: ProjectFormComponent },
+    { path: 'projects/edit/:id', component: ProjectFormComponent },
+    { path: '**', redirectTo: '' }
 ];

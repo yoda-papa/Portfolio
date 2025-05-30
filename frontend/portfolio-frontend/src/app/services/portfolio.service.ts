@@ -26,7 +26,7 @@ export class PortfolioService {
   // Get all projects
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.apiUrl}/Projects`).pipe(
-      tap(projects => console.log('Raw API Response (GET /Projects):', projects)),
+      tap(() => {}),
       map(projects => {
         return projects.map(project => ({
           id: project.id,
@@ -50,7 +50,7 @@ export class PortfolioService {
   // Get a single project
   getProject(id: number): Observable<Project> {
     return this.http.get<Project>(`${this.apiUrl}/Projects/${id}`).pipe(
-      tap(project => console.log('Raw API Response (GET /Projects/id):', project)),
+      tap(() => {}),
       map(project => ({
         id: project.id,
         title: project.title,
@@ -83,7 +83,7 @@ export class PortfolioService {
     };
 
     return this.http.post<Project>(`${this.apiUrl}/Projects`, projectCreateDto).pipe(
-      tap(response => console.log('Raw API Response (POST /Projects):', response)),
+      tap(() => {}),
       catchError(error => {
         console.error('Error creating project:', error);
         return throwError(() => new Error('Failed to create project.'));
@@ -106,7 +106,7 @@ export class PortfolioService {
     };
 
     return this.http.put<void>(`${this.apiUrl}/Projects/${id}`, projectDto).pipe(
-      tap(() => console.log(`Project with ID ${id} updated successfully (PUT /Projects/id)`)),
+      tap(() => {}),
       catchError(error => {
         console.error(`Error updating project with ID ${id}:`, error);
         return throwError(() => new Error(`Failed to update project with ID ${id}.`));
@@ -120,9 +120,8 @@ export class PortfolioService {
       console.error('Attempted to delete project with undefined or null ID.');
       return throwError(() => new Error('Project ID is required for deletion.'));
     }
-    console.log(`Sending DELETE request for project with ID: ${id}`);
     return this.http.delete<void>(`${this.apiUrl}/Projects/${id}`).pipe(
-      tap(() => console.log(`Project with ID ${id} deleted successfully (DELETE /Projects/id)`)),
+      tap(() => {}),
       catchError(error => {
         console.error(`Error deleting project with ID ${id}:`, error);
         return throwError(() => new Error(`Failed to delete project with ID ${id}.`));

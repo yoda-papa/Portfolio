@@ -5,6 +5,7 @@ using Portfolio.Data.Models;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using Portfolio.Api.Dtos;
+using AutoMapper;
 
 namespace Portfolio.Api.Controllers;
 
@@ -15,11 +16,13 @@ public class ProjectsController : ControllerBase
 {
     private readonly PortfolioDbContext _context;
     private readonly ILogger<ProjectsController> _logger;
+    private readonly IMapper _mapper;
 
-    public ProjectsController(PortfolioDbContext context, ILogger<ProjectsController> logger)
+    public ProjectsController(PortfolioDbContext context, ILogger<ProjectsController> logger, IMapper mapper)
     {
         _context = context;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -30,18 +33,7 @@ public class ProjectsController : ControllerBase
         var projects = await _context.Projects.ToListAsync();
         _logger.LogInformation("Found {Count} projects", projects.Count);
         
-        var projectDtos = projects.Select(p => new ProjectDto
-        {
-            Id = p.Id,
-            Title = p.Title,
-            Description = p.Description,
-            ImageUrl = p.ImageUrl,
-            ProjectUrl = p.ProjectUrl,
-            Technologies = p.Technologies,
-            StartDate = p.StartDate,
-            EndDate = p.EndDate,
-            IsActive = p.IsActive
-        });
+        var projectDtos = _mapper.Map<IEnumerable<ProjectDto>>(projects);
         
         return Ok(projectDtos);
     }
@@ -60,18 +52,7 @@ public class ProjectsController : ControllerBase
         }
         _logger.LogInformation("Found project: {Title}", project.Title);
         
-        var projectDto = new ProjectDto
-        {
-            Id = project.Id,
-            Title = project.Title,
-            Description = project.Description,
-            ImageUrl = project.ImageUrl,
-            ProjectUrl = project.ProjectUrl,
-            Technologies = project.Technologies,
-            StartDate = project.StartDate,
-            EndDate = project.EndDate,
-            IsActive = project.IsActive
-        };
+        var projectDto = _mapper.Map<ProjectDto>(project);
         
         return Ok(projectDto);
     }
@@ -94,17 +75,7 @@ public class ProjectsController : ControllerBase
                 return BadRequest(ModelState);
             }
 
-            var project = new Project
-            {
-                Title = projectDto.Title,
-                Description = projectDto.Description,
-                ImageUrl = projectDto.ImageUrl,
-                ProjectUrl = projectDto.ProjectUrl,
-                Technologies = projectDto.Technologies,
-                StartDate = projectDto.StartDate,
-                EndDate = projectDto.EndDate,
-                IsActive = projectDto.IsActive
-            };
+            var project = _mapper.Map<Project>(projectDto);
             
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
@@ -140,14 +111,7 @@ public class ProjectsController : ControllerBase
             return NotFound(new { error = "Project not found" });
         }
 
-        project.Title = projectDto.Title;
-        project.Description = projectDto.Description;
-        project.ImageUrl = projectDto.ImageUrl;
-        project.ProjectUrl = projectDto.ProjectUrl;
-        project.Technologies = projectDto.Technologies;
-        project.StartDate = projectDto.StartDate;
-        project.EndDate = projectDto.EndDate;
-        project.IsActive = projectDto.IsActive;
+        _mapper.Map(projectDto, project);
 
         try
         {
@@ -166,7 +130,7 @@ public class ProjectsController : ControllerBase
         }
         catch (Exception ex)
         {
-             _logger.LogError(ex, "Error updating project: {Message}", ex.Message);
+            _logger.LogError(ex, "Error updating project: {Message}", ex.Message);
             return StatusCode(500, new { error = "An error occurred while updating the project", details = ex.Message });
         }
     }
@@ -196,26 +160,4 @@ public class ProjectsController : ControllerBase
     {
         return _context.Projects.Any(e => e.Id == id);
     }
-}
-
-public class ProjectCreateDto
-{
-    [Required]
-    [StringLength(100)]
-    public string Title { get; set; } = string.Empty;
-    
-    [Required]
-    public string Description { get; set; } = string.Empty;
-    
-    public string? ImageUrl { get; set; }
-    
-    public string? ProjectUrl { get; set; }
-    
-    public List<string> Technologies { get; set; } = new();
-    
-    public DateTime StartDate { get; set; }
-    
-    public DateTime? EndDate { get; set; }
-    
-    public bool IsActive { get; set; }
 } 
