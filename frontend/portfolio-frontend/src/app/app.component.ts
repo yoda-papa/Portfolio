@@ -81,9 +81,22 @@ import * as AOS from 'aos';
       padding: 0.5rem 1rem; /* Match padding of nav links */
     }
 
+    /* Adjust padding and margin for alignment in collapsed menu */
+    @media (max-width: 991.98px) {
+      .navbar .btn-link {
+        padding: 0.5rem 0;
+        margin-left: 0;
+      }
+    }
+
     .navbar .btn-link:hover {
        color: var(--navbar-link-hover) !important; /* Ensure hover color matches nav links */
        text-decoration: underline; /* Add underline on hover */
+    }
+
+    /* Style for the hamburger menu icon */
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h22M4 15h22M4 22h22'/%3E%3C/svg%3E") !important;
     }
 
     main {
