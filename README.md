@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Harshit Kumar - Professional Portfolio
 
 A modern, accessible, and responsive portfolio website showcasing my professional experience, skills, and projects as a Full Stack Developer.
@@ -115,3 +116,6 @@ Harshit Kumar
 Email: harshit2hk@gmail.com  
 LinkedIn: [Harshit Kumar](https://www.linkedin.com/in/harshit-kumar41/)  
 Phone: +91 8299446362 
+=======
+# Portfolio
+>>>>>>> d9adf451db973d43b7690ff7e88b774b659d8e20
