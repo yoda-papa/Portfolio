@@ -1,106 +1,99 @@
-<<<<<<< HEAD
 # Harshit Kumar - Professional Portfolio
 
-A modern, accessible, and responsive portfolio website showcasing my professional experience, skills, and projects as a Full Stack Developer.
+A modern, accessible, and responsive portfolio application showcasing my professional experience, skills, and projects as a Full Stack Developer.
 
 ## 🚀 Features
 
 - **Responsive design** for all devices (desktop, tablet, mobile)
 - **Modern UI** with smooth animations and transitions
-- **Dark/Light theme toggle** with persistent preference
-- **Mobile-friendly navigation** (hamburger menu)
-- **Accessible**: semantic HTML, ARIA, keyboard navigation, visible focus, skip link
-- **Performance optimized**: deferred scripts, font loading, lazy image loading
+- **Accessible**: semantic HTML, ARIA, keyboard navigation, visible focus
 - **Interactive sections** for experience, skills, and projects
 - **Contact information** with social links
+- **Real-time updates** for projects using SignalR
+- **API** for managing project data
 
 ## 🌐 Live Demo
 
 > _Coming soon!_
-> (Deploy to GitHub Pages, Vercel, or Netlify and add your link here)
+> (Deploy your frontend and backend and add your link here)
 
 ## 🛠️ Technologies Used
 
-- HTML5, Semantic HTML
-- CSS3 (CSS Variables, Flexbox, Grid)
-- JavaScript (ES6+)
-- Font Awesome Icons
-- Google Fonts (Poppins)
+- **Frontend:**
+    - Angular
+    - TypeScript
+    - HTML5, CSS3
+    - SignalR Client
+- **Backend:**
+    - .NET Core
+    - C#
+    - ASP.NET Core Web API
+    - Entity Framework Core
+    - SQL Server LocalDB
+    - SignalR Hub
+    - AutoMapper
+- **Other:**
+    - Git
+    - npm
+    - .NET SDK
 
 ## 📁 Project Structure
 
 ```
 portfolio/
-├── index.html
-├── src/
-│   ├── styles/
-│   │   ├── components/
-│   │   ├── layouts/
-│   │   ├── themes/
-│   │   └── utilities/
-│   ├── scripts/
-│   │   ├── modules/
-│   │   ├── components/
-│   │   └── utils/
-│   ├── assets/
-│   │   ├── images/
-│   │   ├── icons/
-│   │   └── fonts/
-│   └── data/
-├── css/
-│   ├── main.css
-│   └── animations.css
-├── js/
-│   └── main.js
-├── dist/
-├── docs/
-├── tests/
-├── server.js
+├── backend/
+│   ├── Portfolio.Api/
+│   ├── Portfolio.Data/
+│   └── Portfolio.sln
+├── frontend/
+│   └── portfolio-frontend/
+├── .git/
+├── .gitignore
+├── README.md
+├── package-lock.json
 ├── package.json
-└── README.md
 ```
 
 ## ⚡ Setup and Local Development
+
+To run this project locally, you need to have the .NET SDK and Node.js/npm installed.
 
 1. **Clone the repository:**
    ```bash
    git clone [repository-url]
    cd portfolio
    ```
-2. **Install dependencies (for Node.js server):**
-   ```bash
-   npm install
-   ```
-3. **Start a local server:**
-   - Using Node.js:
+
+2. **Set up the Backend API:**
+   - Navigate to the backend API project directory:
      ```bash
-     npm start
-     # or
-     node server.js
+     cd backend/Portfolio.Api
      ```
-   - Or using Python (if installed):
+   - Run the database migrations and start the API:
      ```bash
-     python -m http.server 3000
+     dotnet run
      ```
-4. **Open your browser:**
-   - Visit [http://localhost:3000](http://localhost:3000)
+   The API should be running at `http://localhost:5102`.
 
-> **Note:** Opening `index.html` directly may cause CORS issues with JavaScript modules. Always use a local server.
+3. **Set up the Frontend Application:**
+   - Open a *new* terminal window and navigate to the frontend project directory:
+     ```bash
+     cd frontend/portfolio-frontend
+     ```
+   - Install the dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the Angular development server:
+     ```bash
+     ng serve
+     ```
+   The frontend application should be running at `http://localhost:4200`.
 
-## 🖌️ Customization
+4. **Access the Application:**
+   - Open your web browser and navigate to `http://localhost:4200`.
 
-- Update personal info in `index.html`
-- Change color scheme in `src/styles/themes/variables.css`
-- Add/remove sections as needed
-- Update content with your own experience, skills, and projects
-- Add your own favicon (`favicon.ico`)
-
-## ♿ Accessibility & ♻️ Performance
-
-- Semantic HTML, ARIA roles/labels, skip link, visible focus
-- Keyboard navigation for all interactive elements
-- High color contrast for readability
-- Deferred scripts, font-display swap, lazy image loading
+> **Note:** Ensure both the backend API (`dotnet run`) and the frontend application (`ng serve`) are running simultaneously in separate terminal windows.
 
 ## 🤝 Contributing
 
@@ -115,7 +108,4 @@ This project is open source and available under the [MIT License](LICENSE).
 Harshit Kumar  
 Email: harshit2hk@gmail.com  
 LinkedIn: [Harshit Kumar](https://www.linkedin.com/in/harshit-kumar41/)  
-Phone: +91 8299446362 
-=======
-# Portfolio
->>>>>>> d9adf451db973d43b7690ff7e88b774b659d8e20
+Phone: +91 8299446362

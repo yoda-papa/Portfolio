@@ -14,11 +14,7 @@ Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        // options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    });
+builder.Services.AddControllers();
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
@@ -131,8 +127,3 @@ app.MapControllers();
 app.MapHub<PortfolioHub>("/portfolioHub");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
